@@ -8,7 +8,6 @@ public class DevPulseApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(DevPulseApplication.class, args);
-		System.out.println("Working");
 	}
 
 }
