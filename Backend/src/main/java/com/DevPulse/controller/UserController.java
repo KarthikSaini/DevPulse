@@ -2,6 +2,7 @@ package com.DevPulse.controller;
 
 import com.DevPulse.dto.UserRequest;
 import com.DevPulse.dto.UserResponse;
+import com.DevPulse.entity.User;
 import com.DevPulse.service.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -43,5 +44,12 @@ public class UserController {
     public ResponseEntity<UserResponse> updateUser(@PathVariable Long id,@RequestBody UserRequest request){
         UserResponse response = userService.updateUser(id,request);
         return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteUser(@PathVariable Long id){
+        boolean isDeleted = userService.deleteUser(id);
+        return !isDeleted ? new ResponseEntity<>("User Deleted",HttpStatus.OK) :
+                new ResponseEntity<>("User not deleted", HttpStatus.NOT_FOUND);
     }
 }
