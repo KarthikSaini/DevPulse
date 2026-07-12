@@ -24,6 +24,7 @@ devpulse-backend
 │   │           │      RegisterRequest.java
 │   │           │      UserResponse.java
 │   │           │      GithubRepoResponse.java
+|   |           |      UserRequest.java
 │   │           │
 │   │           ├── entity
 │   │           │      User.java
