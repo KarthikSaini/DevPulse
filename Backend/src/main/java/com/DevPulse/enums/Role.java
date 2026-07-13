@@ -1,4 +1,4 @@
-package src.main.java.com.DevPulse.enums;
+package com.DevPulse.enums;
 
 public class Role {
 }

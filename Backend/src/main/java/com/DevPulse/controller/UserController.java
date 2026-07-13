@@ -31,7 +31,7 @@ public class UserController {
     public ResponseEntity<UserResponse> getById(@RequestBody Map<String, String> request){
         String email = request.get("email");
         UserResponse response = userService.getByEmail(email);
-        return new ResponseEntity<>(response, HttpStatus.FOUND);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @GetMapping
