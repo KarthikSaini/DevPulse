@@ -1,4 +1,8 @@
-package src.main.java.com.DevPulse.service;
+package com.DevPulse.service;
 
-public class GithubService {
+import com.DevPulse.dto.GithubProfileResponse;
+
+public interface GithubService {
+
+    GithubProfileResponse getProfile(Long userId);
 }
