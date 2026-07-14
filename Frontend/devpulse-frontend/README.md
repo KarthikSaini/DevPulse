@@ -48,3 +48,75 @@ export default tseslint.config({
   },
 })
 ```
+
+devpulse-frontend
+│
+├── public
+│
+├── src
+│   │
+│   ├── api
+│   │      githubApi.ts
+│   │      userApi.ts
+│   │      skillApi.ts
+│   │
+│   ├── assets
+│   │      images/
+│   │      icons/
+│   │
+│   ├── components
+│   │      common/
+│   │          Navbar.tsx
+│   │          Footer.tsx
+│   │          Sidebar.tsx
+│   │          Button.tsx
+│   │          Loader.tsx
+│   │
+│   │      github/
+│   │          GithubProfileCard.tsx
+│   │          GithubRepoCard.tsx
+│   │
+│   │      dashboard/
+│   │          StatsCard.tsx
+│   │          SkillCard.tsx
+│   │
+│   ├── layouts
+│   │      MainLayout.tsx
+│   │
+│   ├── pages
+│   │      Home.tsx
+│   │      Dashboard.tsx
+│   │      Github.tsx
+│   │      Profile.tsx
+│   │      Skills.tsx
+│   │      Projects.tsx
+│   │      Login.tsx
+│   │      Register.tsx
+│   │
+│   ├── services
+│   │      githubService.ts
+│   │
+│   ├── hooks
+│   │      useGithub.ts
+│   │
+│   ├── interfaces
+│   │      Github.ts
+│   │      User.ts
+│   │      Skill.ts
+│   │
+│   ├── utils
+│   │      constants.ts
+│   │
+│   ├── routes
+│   │      AppRoutes.tsx
+│   │
+│   ├── styles
+│   │      global.css
+│   │
+│   ├── App.tsx
+│   │
+│   └── main.tsx
+│
+├── .env
+├── package.json
+└── vite.config.ts
