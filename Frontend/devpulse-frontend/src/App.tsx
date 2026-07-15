@@ -4,6 +4,7 @@
 // import './App.css'
 import './pages/Github';
 import Github from './pages/Github';
+import AppRoutes from './routes/AppRoutes';
 
 // function App() {
 //   const [count, setCount] = useState(0)
@@ -38,11 +39,7 @@ import Github from './pages/Github';
 
 function App() {
 
-  return (
-    <>
-      <Github/>
-    </>
-  )
+  return <AppRoutes />
 }
 
 export default App

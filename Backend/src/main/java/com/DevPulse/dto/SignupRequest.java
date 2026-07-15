@@ -6,11 +6,14 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 @Data
-public class LoginRequest {
+public class SignupRequest {
 
-    @NotNull
+    @NotBlank
+    private String name;
+
     @Email
     @NotBlank
+    @NotNull
     private String email;
 
     @NotBlank

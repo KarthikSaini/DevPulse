@@ -52,13 +52,13 @@ public class UserServiceImpl implements UserService{
     @Override
     public UserResponse getByEmail(String email) {
 
-//        User user = userRepository.findByEmail(email);
-//        if(user == null){
-//            throw new UserNotFoundException("User not found");
-//        }
+        User user = userRepository.findByEmail(email);
+        if(user == null){
+            throw new UserNotFoundException("User not found");
+        }
 
-        User user = userRepository.findByEmail(email)
-                .orElseThrow(()-> new UserNotFoundException("User not found"));
+//        User user = userRepository.findByEmail(email)
+//                .orElseThrow(()-> new UserNotFoundException("User not found"));
 
         return mapToUserResponse(user);
 

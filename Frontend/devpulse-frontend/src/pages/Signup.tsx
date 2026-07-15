@@ -1,14 +1,15 @@
 import { useState } from "react";
-import { login } from "../services/authService";
+import { signup } from "../services/authService";
 import "../styles/Auth.css";
 import { useNavigate } from "react-router-dom";
 
-function Login() {
+function Signup() {
 
     const navigate = useNavigate();
 
     const [form, setForm] = useState({
 
+        name: "",
         email: "",
         password: ""
 
@@ -29,12 +30,11 @@ function Login() {
 
         try {
 
-            const response = await login(form);
+            await signup(form);
 
-            localStorage.setItem("userId", String(response.id));
-            localStorage.setItem("token", response.token);
+            alert("Account Created Successfully");
 
-            navigate("/dashboard");
+            navigate("/");
 
         }
 
@@ -52,9 +52,16 @@ function Login() {
 
             <div className="auth-card">
 
-                <h1>Welcome Back</h1>
+                <h1>Create Account</h1>
 
-                <p>Login to continue</p>
+                <p>Welcome to DevPulse</p>
+
+                <input
+                    name="name"
+                    placeholder="Full Name"
+                    value={form.name}
+                    onChange={handleChange}
+                />
 
                 <input
                     type="email"
@@ -74,17 +81,17 @@ function Login() {
 
                 <button onClick={handleSubmit}>
 
-                    Login
+                    Sign Up
 
                 </button>
 
                 <div className="auth-link">
 
-                    Don't have an account?
+                    Already have an account?
 
-                    <span onClick={() => navigate("/signup")}>
+                    <span onClick={() => navigate("/")}>
 
-                        Sign Up
+                        Login
 
                     </span>
 
@@ -98,4 +105,4 @@ function Login() {
 
 }
 
-export default Login;
+export default Signup;
