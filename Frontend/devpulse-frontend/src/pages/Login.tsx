@@ -2,12 +2,14 @@ import { useState } from "react";
 import { login } from "../services/authService";
 import "../styles/Auth.css";
 import { useNavigate } from "react-router-dom";
+import { LoginRequest } from "../interfaces/Login";
+import { savedUserSession } from "../utils/storage";
 
 function Login() {
 
     const navigate = useNavigate();
 
-    const [form, setForm] = useState({
+    const [form, setForm] = useState<LoginRequest>({
 
         email: "",
         password: ""
@@ -31,8 +33,7 @@ function Login() {
 
             const response = await login(form);
 
-            localStorage.setItem("userId", String(response.id));
-            localStorage.setItem("token", response.token);
+            savedUserSession(response.id, response.token);
 
             navigate("/dashboard");
 
