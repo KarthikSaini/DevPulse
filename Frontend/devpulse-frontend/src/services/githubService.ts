@@ -5,3 +5,8 @@ export const getGithubProfile = async (userId: number): Promise<GithubProfile> =
     const response = await api.get(`/github/${userId}`)
     return response.data;
 }
+
+export const getRepositories = async (userId: number) => {
+    const response = await api.get(`/github/user/${userId}/repos`)
+    return response.data;
+}

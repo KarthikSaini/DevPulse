@@ -1,11 +1,18 @@
-function Navbar() {
+import { Dashboard } from "../../interfaces/Dashboard";
 
-    return (
+interface Props{
+
+    dashboard?: Dashboard;
+
+}
+
+function Navbar({dashboard}:Props){
+
+    return(
 
         <header className="navbar">
 
             <input
-                type="text"
                 placeholder="Search..."
             />
 
@@ -13,9 +20,19 @@ function Navbar() {
 
                 🔔
 
-                <div className="avatar">
+                <div className="user-info">
 
-                    K
+                    <div className="avatar">
+
+                        {dashboard?.name.charAt(0)}
+
+                    </div>
+
+                    <span>
+
+                        {dashboard?.name}
+
+                    </span>
 
                 </div>
 

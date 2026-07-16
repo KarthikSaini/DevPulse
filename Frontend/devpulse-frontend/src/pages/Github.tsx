@@ -1,122 +1,95 @@
-import { useState } from 'react';
-import './CSS/Github.css';
-import { getGithubProfile } from '../services/githubService'; 
-import { GithubProfile } from '../interfaces/Github';
+import { useEffect, useState } from "react";
 
-function Github(){
-    
-    const [userId, setUserId] = useState("");
+import "./CSS/Github.css";
 
-    const [profile, setProfile] = useState<GithubProfile | null>(null);
+// import GithubProfileCard from "../components/github/GithubProfileCard";
+import GithubStats from "../components/github/GithubStats";
+import RepositoryList from "../components/github/RepositoryList";
 
-    const searchProfile = async () => {
+import {
+    getGithubProfile,
+    getRepositories
+} from "../services/githubService";
+
+import {
+    GithubProfile,
+    Repository
+} from "../interfaces/Github";
+
+function Github() {
+
+    const [profile, setProfile] = useState<GithubProfile>();
+
+    const [repositories, setRepositories] = useState<Repository[]>([]);
+
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+
+        loadGithubData();
+
+    }, []);
+
+    async function loadGithubData() {
+
         try {
-            const response = await getGithubProfile(Number(userId))
-            setProfile(response);
-        } catch (error) {
-            console.log(error);
+
+            const userId = Number(localStorage.getItem("userId"));
+
+            if (!userId) {
+                return;
+            }
+
+            const profileResponse = await getGithubProfile(userId);
+
+            const repositoryResponse = await getRepositories(userId);
+
+            setProfile(profileResponse);
+
+            setRepositories(repositoryResponse);
+
         }
-        
-    };
+        catch (error) {
 
-    return (
-         <div className="container">
+            console.error("Failed to load GitHub data", error);
 
-            <h1>DevPulse</h1>
+        }
+        finally {
 
-            <div className="search-box">
+            setLoading(false);
 
-                <input
-                    type="number"
-                    placeholder="Enter User Id"
-                    value={userId}
-                    onChange={(e)=>setUserId(e.target.value)}
-                />
+        }
 
-                <button onClick={searchProfile}>
-                    Search
-                </button>
+    }
+
+    if (loading) {
+
+        return (
+
+            <div className="github-loading">
+
+                Loading GitHub Data...
 
             </div>
 
-            {profile && (
+        );
 
-                <div className="profile-card">
+    }
 
-                    {/* <img
-                        src={profile.avatarUrl}
-                        alt={profile.name}
-                    /> */}
+    return (
 
-                    <img
-                        src={profile?.avatar_url}
-                        alt="Avatar"
-                        width={150}
-                    />
+        <div className="github-page">
 
-                    <h2>{profile.name}</h2>
+            {/* <GithubProfileCard profile={profile} /> */}
 
-                    <h4>@{profile.login}</h4>
+            <GithubStats profile={profile} />
 
-                    <p>{profile.bio}</p>
-
-                    <div className="stats">
-
-                        <div>
-
-                            <h3>{profile.followers}</h3>
-
-                            <span>Followers</span>
-
-                        </div>
-
-                        <div>
-
-                            <h3>{profile.following}</h3>
-
-                            <span>Following</span>
-
-                        </div>
-
-                        <div>
-
-                            <h3>{profile.publicRepos}</h3>
-
-                            <span>Repositories</span>
-
-                        </div>
-
-                    </div>
-
-                    <p>
-
-                        <strong>Company : </strong>
-
-                        {profile.company || "N/A"}
-
-                    </p>
-
-                    <p>
-
-                        <strong>Location : </strong>
-
-                        {profile.location || "N/A"}
-
-                    </p>
-
-                    <a
-                        href={profile.profileUrl}
-                        target="_blank"
-                    >
-                        View Github Profile
-                    </a>
-
-                </div>
-
-            )}
+            <RepositoryList repositories={repositories} />
 
         </div>
+
     );
+
 }
 
 export default Github;

@@ -1,64 +1,95 @@
-function IntegrationPanel() {
+import { Dashboard } from "../../interfaces/Dashboard";
 
-    return (
+interface Props{
+
+    dashboard?: Dashboard;
+
+}
+
+function IntegrationPanel({dashboard}:Props){
+
+    return(
 
         <div className="integration-card">
 
             <h2>
 
-                Connect Your Platforms
+                Connected Platforms
 
             </h2>
 
             <div className="integration-list">
 
-                <div className="platform">
+                {
 
-                    <span>🐙 GitHub</span>
+                    dashboard?.platforms.map(platform=>(
 
-                    <button>
+                        <div
+                            key={platform.name}
+                            className="platform"
+                        >
 
-                        Connect
+                            <div>
 
-                    </button>
+                                <strong>
 
-                </div>
+                                    {platform.icon}
 
-                <div className="platform">
+                                    {" "}
 
-                    <span>🟡 LeetCode</span>
+                                    {platform.name}
 
-                    <button>
+                                </strong>
 
-                        Coming Soon
+                                <br/>
 
-                    </button>
+                                {
 
-                </div>
+                                    platform.connected ?
 
-                <div className="platform">
+                                        <small>
 
-                    <span>💼 LinkedIn</span>
+                                            @{platform.username}
 
-                    <button>
+                                        </small>
 
-                        Coming Soon
+                                    :
 
-                    </button>
+                                        <small>
 
-                </div>
+                                            Not Connected
 
-                <div className="platform">
+                                        </small>
 
-                    <span>📋 Jira</span>
+                                }
 
-                    <button>
+                            </div>
 
-                        Coming Soon
+                            {
 
-                    </button>
+                                platform.connected ?
 
-                </div>
+                                    <button className="connected">
+
+                                        Connected
+
+                                    </button>
+
+                                :
+
+                                    <button>
+
+                                        Connect
+
+                                    </button>
+
+                            }
+
+                        </div>
+
+                    ))
+
+                }
 
             </div>
 

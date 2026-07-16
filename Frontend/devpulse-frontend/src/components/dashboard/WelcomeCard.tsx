@@ -1,18 +1,28 @@
-function WelcomeCard() {
+import { Dashboard } from "../../interfaces/Dashboard";
 
-    return (
+interface Props{
+
+    dashboard?: Dashboard;
+
+}
+
+function WelcomeCard({dashboard}:Props){
+
+    return(
 
         <div className="welcome-card">
 
             <h1>
 
-                Welcome back 👋
+                Welcome back,
+
+                {dashboard?.name} 👋
 
             </h1>
 
             <p>
 
-                Continue your developer journey with DevPulse.
+                {dashboard?.bio}
 
             </p>
 

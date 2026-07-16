@@ -1,6 +1,14 @@
-function StatsCard() {
+import { Dashboard } from "../../interfaces/Dashboard";
 
-    return (
+interface Props{
+
+    dashboard?: Dashboard;
+
+}
+
+function StatsCard({dashboard}:Props){
+
+    return(
 
         <div className="stats-grid">
 
@@ -8,13 +16,33 @@ function StatsCard() {
 
                 <h3>
 
-                    Learning Progress
+                    Profile
 
                 </h3>
 
                 <h2>
 
-                    25%
+                    {dashboard?.profileCompletion}%
+
+                </h2>
+
+            </div>
+
+            <div className="stat-card">
+
+                <h3>
+
+                    Connected Platforms
+
+                </h3>
+
+                <h2>
+
+                    {
+
+                        dashboard?.platforms.filter(p=>p.connected).length
+
+                    }
 
                 </h2>
 
@@ -30,7 +58,7 @@ function StatsCard() {
 
                 <h2>
 
-                    6
+                    --
 
                 </h2>
 
@@ -46,23 +74,7 @@ function StatsCard() {
 
                 <h2>
 
-                    2
-
-                </h2>
-
-            </div>
-
-            <div className="stat-card">
-
-                <h3>
-
-                    Platforms
-
-                </h3>
-
-                <h2>
-
-                    1
+                    --
 
                 </h2>
 

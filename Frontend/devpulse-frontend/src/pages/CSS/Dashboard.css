@@ -160,3 +160,25 @@ body{
 .platform button:hover{
     background:#1d4ed8;
 }
+
+.user-info{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+}
+
+.connected{
+
+    background:#22c55e !important;
+
+}
+
+.platform small{
+
+    color:gray;
+
+}

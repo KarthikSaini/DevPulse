@@ -1,135 +1,31 @@
-.container{
-    width: 100%;
-    min-height: 100vh;
+.github-page{
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    background-color: #f4f4f4;
-}
+    max-width:1200px;
 
-.container h1{
-
-    margin-bottom:30px;
-
-    color:#24292e;
-
-    font-size:40px;
-
-}
-
-.search-box{
-
-    width:450px;
-
-    display:flex;
-    gap:15px;
-}
-
-.search-box input{
-
-    flex:1;
-
-    padding:14px;
-
-    font-size:16px;
-
-    border:1px solid #ddd;
-
-    border-radius:6px;
-
-}
-
-.search-box button{
-
-    padding:14px 20px;
-
-    border:none;
-
-    background:#24292e;
-
-    color:white;
-
-    border-radius:6px;
-
-    transition:.3s;
-
-}
-
-.search-box button:hover{
-
-    background:#444;
-}
-
-.profile-card{
-
-    width:500px;
-
-    margin-top:40px;
-
-    background:white;
-
-    border-radius:10px;
+    margin:auto;
 
     padding:30px;
 
-    text-align:center;
+    display:flex;
 
-    box-shadow:0 2px 15px rgba(0,0,0,.1);
+    flex-direction:column;
 
-}
-
-.profile-card img{
-
-    width:140px;
-
-    border-radius:50%;
+    gap:30px;
 
 }
 
-.profile-card h2{
-
-    margin-top:15px;
-
-}
-
-.profile-card h4{
-
-    color:gray;
-
-    margin-bottom:15px;
-
-}
-
-.stats{
+.github-loading{
 
     display:flex;
 
-    justify-content:space-around;
+    justify-content:center;
 
-    margin:30px 0;
+    align-items:center;
 
-}
+    height:100vh;
 
-.stats h3{
+    font-size:22px;
 
-    color:#24292e;
-
-}
-
-.profile-card a{
-
-    display:inline-block;
-
-    margin-top:20px;
-
-    padding:12px 18px;
-
-    background:#24292e;
-
-    color:white;
-
-    border-radius:5px;
+    font-weight:bold;
 
 }

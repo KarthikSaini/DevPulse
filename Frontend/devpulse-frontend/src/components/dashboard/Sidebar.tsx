@@ -1,30 +1,36 @@
+import { NavLink } from "react-router-dom";
+
 function Sidebar() {
 
     return (
 
         <aside className="sidebar">
 
-            <h2 className="logo">
+            <h2>DevPulse</h2>
 
-                DevPulse
+            <NavLink to="/dashboard">
+                Dashboard
+            </NavLink>
 
-            </h2>
+            <NavLink to="/github">
+                GitHub
+            </NavLink>
 
-            <nav>
+            <NavLink to="/skills">
+                Skills
+            </NavLink>
 
-                <a href="#">🏠 Dashboard</a>
+            <NavLink to="/projects">
+                Projects
+            </NavLink>
 
-                <a href="#">👤 Profile</a>
+            <NavLink to="/analytics">
+                Analytics
+            </NavLink>
 
-                <a href="#">💻 Skills</a>
-
-                <a href="#">📁 Projects</a>
-
-                <a href="#">📊 Analytics</a>
-
-                <a href="#">⚙ Settings</a>
-
-            </nav>
+            <NavLink to="/settings">
+                Settings
+            </NavLink>
 
         </aside>
 

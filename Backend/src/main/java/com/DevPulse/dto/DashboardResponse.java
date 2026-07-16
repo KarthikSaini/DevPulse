@@ -25,5 +25,11 @@ public class DashboardResponse {
 
     private Integer profileCompletion;
 
+    private Integer skills;
+
+    private Integer projects;
+
+    private Integer connectedPlatforms;
+
     private List<PlatformDTO> platforms;
 }
