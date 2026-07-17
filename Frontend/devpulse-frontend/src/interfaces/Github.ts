@@ -4,7 +4,7 @@ export interface GithubProfile {
 
     name: string;
 
-    avatarUrl: string;
+    avatar_url: string;
 
     bio: string;
 
@@ -14,7 +14,7 @@ export interface GithubProfile {
 
     following: number;
 
-    publicRepos: number;
+    public_repos: number;
 
     location: string;
 

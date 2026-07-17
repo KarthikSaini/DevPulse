@@ -10,11 +10,14 @@ function GithubProfileCard({ profile }: Props) {
         return <p>Loading profile...</p>;
     }
 
+    console.log(profile);
+    
+
     return (
         <div className="github-profile-card">
 
             <img
-                src={profile.avatarUrl}
+                src={profile.avatar_url}
                 alt={profile.name}
                 className="github-avatar"
             />

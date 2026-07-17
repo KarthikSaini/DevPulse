@@ -8,6 +8,9 @@ function GithubStats({ profile }: Props) {
 
     if (!profile) return null;
 
+    console.log(profile);
+    
+
     return (
 
         <div className="github-stats">
@@ -23,11 +26,14 @@ function GithubStats({ profile }: Props) {
             </div>
 
             <div className="stat-box">
-                <h3>{profile.publicRepos}</h3>
+                <h3>{profile.public_repos}</h3>
                 <p>Repositories</p>
             </div>
 
         </div>
+
+                  
+
 
     );
 

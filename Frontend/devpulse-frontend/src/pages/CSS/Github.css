@@ -1,31 +1,246 @@
+/* Page Layout */
 .github-page{
-
     max-width:1200px;
-
-    margin:auto;
-
+    margin:0 auto;
     padding:30px;
-
     display:flex;
-
     flex-direction:column;
-
     gap:30px;
+    background:#f5f7fb;
+    min-height:100vh;
+}
+
+/* Loading */
+.github-loading{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+    font-size:22px;
+    font-weight:600;
+    color:#2563eb;
+}
+
+/* =========================
+   PROFILE CARD
+   ========================= */
+
+.github-profile-card{
+    background:white;
+    border-radius:20px;
+    padding:30px;
+    display:flex;
+    gap:25px;
+    align-items:center;
+    box-shadow:0 8px 24px rgba(0,0,0,.06);
+}
+
+.github-avatar{
+    width:120px;
+    height:120px;
+    border-radius:50%;
+    object-fit:cover;
+    border:4px solid #e5e7eb;
+}
+
+.github-profile-info{
+    flex:1;
+}
+
+.github-profile-info h2{
+    margin:0;
+    font-size:28px;
+    color:#111827;
+}
+
+.github-profile-info p{
+    margin:8px 0;
+    color:#6b7280;
+    line-height:1.5;
+}
+
+.github-profile-info a{
+    display:inline-block;
+    margin-top:12px;
+    color:#2563eb;
+    font-weight:600;
+    text-decoration:none;
+}
+
+.github-profile-info a:hover{
+    text-decoration:underline;
+}
+
+/* =========================
+   STATS
+   ========================= */
+
+.github-stats{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:20px;
+}
+
+.stat-box{
+    background:white;
+    padding:24px;
+    border-radius:16px;
+    box-shadow:0 8px 24px rgba(0,0,0,.06);
+    text-align:center;
+}
+
+.stat-box h3{
+    margin:0;
+    font-size:32px;
+    color:#2563eb;
+}
+
+.stat-box p{
+    margin-top:10px;
+    color:#6b7280;
+    font-weight:500;
+}
+
+/* =========================
+   REPOSITORIES
+   ========================= */
+
+.repo-section{
+    display:flex;
+    flex-direction:column;
+    gap:20px;
+}
+
+.repo-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.repo-header h2{
+    color:#111827;
+    font-size:26px;
+}
+
+.repo-count{
+    color:#6b7280;
+    font-weight:600;
+}
+
+.repo-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(340px,1fr));
+    gap:20px;
+}
+
+/* =========================
+   REPOSITORY CARD
+   ========================= */
+
+.repository-card{
+    background:white;
+    border-radius:18px;
+    padding:24px;
+    box-shadow:0 8px 24px rgba(0,0,0,.06);
+    transition:all .25s ease;
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+    margin-top: 4vh;
+}
+
+.repository-card:hover{
+    transform:translateY(-4px);
+    box-shadow:0 12px 32px rgba(0,0,0,.10);
+}
+
+.repository-card h3{
+    margin:0;
+    color:#111827;
+    font-size:20px;
+}
+
+.repository-card p{
+    margin:0;
+    color:#6b7280;
+    line-height:1.5;
+}
+
+.repository-footer{
+    display:flex;
+    gap:18px;
+    flex-wrap:wrap;
+    font-size:14px;
+    color:#374151;
+    font-weight:600;
+}
+
+.repository-card a{
+    margin-top:5px;
+    color:#2563eb;
+    text-decoration:none;
+    font-weight:600;
+}
+
+.repository-card a:hover{
+    text-decoration:underline;
+}
+
+/* =========================
+   RESPONSIVE
+   ========================= */
+
+@media (max-width:768px){
+
+    .github-profile-card{
+        flex-direction:column;
+        text-align:center;
+    }
+
+    .github-avatar{
+        width:100px;
+        height:100px;
+    }
+
+    .repo-grid{
+        grid-template-columns:1fr;
+    }
+}
+
+.charts-grid{
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:25px;
 
 }
 
-.github-loading{
+.chart-card{
 
-    display:flex;
+    background:white;
 
-    justify-content:center;
+    border-radius:15px;
 
-    align-items:center;
+    padding:20px;
 
-    height:100vh;
+    box-shadow:0 8px 25px rgba(0,0,0,.08);
 
-    font-size:22px;
+}
 
-    font-weight:bold;
+.chart-card h2{
+
+    margin-bottom:20px;
+
+}
+
+@media(max-width:900px){
+
+    .charts-grid{
+
+        grid-template-columns:1fr;
+
+    }
 
 }
