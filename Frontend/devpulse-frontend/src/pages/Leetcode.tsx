@@ -4,6 +4,7 @@ import "./CSS/Leetcode.css";
 import { LeetcodeResponse } from "../interfaces/Leetcode";
 import { getLeetcodeDashboard } from "../services/leetcodeService";
 import LeetcodeHeatmap from "../components/Leetcode/LeetcodeHeatmap";
+import Sidebar from "../components/dashboard/Sidebar";
 
 function Leetcode() {
 
@@ -31,6 +32,11 @@ function Leetcode() {
         return <div className="leetcode-loading">Loading...</div>;
 
     return (
+
+        <div className="app-layout">
+
+            {/* <Sidebar /> */}
+
 
         <div className="leetcode-page">
 
@@ -186,6 +192,8 @@ function Leetcode() {
                 </div>
 
             </div>
+
+        </div>
 
         </div>
 

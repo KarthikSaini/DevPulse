@@ -36,6 +36,8 @@ function Github() {
 
     return (
 
+        <div className="app-layout">
+        
         <div className="github-page">
 
             <GithubHeader profile={github} />
@@ -55,6 +57,8 @@ function Github() {
             />
 
             <RepositoryList repositories={github.repositories} />
+
+        </div>
 
         </div>
 

@@ -594,3 +594,23 @@
     }
 
 }
+
+.app-layout{
+
+    display:flex;
+
+    min-height:100vh;
+
+    background:#f5f7fb;
+
+}
+
+.leetcode-page{
+
+    flex:1;
+
+    padding:35px;
+
+    overflow-y:auto;
+
+}
