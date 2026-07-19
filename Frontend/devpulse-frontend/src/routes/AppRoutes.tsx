@@ -6,6 +6,7 @@ import Dashboard from "../pages/Dashboard";
 import Leetcode from "../pages/Leetcode";
 import MainLayout from "../layouts/MainLayout";
 import Skills from "../pages/Skills";
+import Projects from "../pages/Projects";
 
 
 function AppRoutes() {
@@ -19,6 +20,7 @@ function AppRoutes() {
             <Route path="/github" element={ <Github/> }/>
             <Route path="/leetcode" element={ <Leetcode/> } />
             <Route path="/Skills" element={ <Skills/> } />
+            <Route path="/Projects" element={ <Projects/> } />
             </Route>
         </Routes>
     </BrowserRouter>
