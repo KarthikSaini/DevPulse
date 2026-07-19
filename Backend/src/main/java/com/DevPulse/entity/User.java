@@ -53,4 +53,7 @@ public class User {
     private LocalDateTime updatedAt;
 
     private String githubAccessToken;
+
+    @Column(name = "leetcode_username")
+    private String leetcode_username;
 }

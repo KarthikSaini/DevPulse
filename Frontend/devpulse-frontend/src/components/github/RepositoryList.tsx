@@ -7,6 +7,8 @@ interface Props {
 
 function RepositoryList({ repositories }: Props) {
 
+    console.log(repositories);
+
     return (
         <div className="repo-section">
 

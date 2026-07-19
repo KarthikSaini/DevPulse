@@ -32,3 +32,37 @@ export interface GithubResponse {
 
     repositories: GithubRepository[];
 }
+
+export interface Repository {
+
+    name: string;
+
+    description: string;
+
+    language: string;
+
+    stars: number;
+
+    forks_count: number;
+
+    watchers_count: number;
+
+    open_issues_count: number;
+
+    default_branch: string;
+
+    size: number;
+
+    visibility: string;
+
+    html_url: string;
+
+    created_at: string;
+
+    updated_at: string;
+
+    pushed_at: string;
+
+    stargazers_count: number;
+
+}

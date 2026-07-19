@@ -23,9 +23,28 @@ public class GithubRepository {
     @JsonProperty("forks_count")
     private Integer forks;
 
+    @JsonProperty("watchers_count")
+    private Integer watchers;
+
+    @JsonProperty("open_issues_count")
+    private Integer openIssues;
+
+    @JsonProperty("default_branch")
+    private String defaultBranch;
+
+    private Integer size;
+
+    private String visibility;
+
     @JsonProperty("html_url")
     private String htmlUrl;
 
+    @JsonProperty("created_at")
+    private String createdAt;
+
     @JsonProperty("updated_at")
     private String updatedAt;
+
+    @JsonProperty("pushed_at")
+    private String pushedAt;
 }

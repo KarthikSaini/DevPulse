@@ -16,6 +16,10 @@ function Sidebar() {
                 GitHub
             </NavLink>
 
+            <NavLink to="/leetcode">
+                LeetCode
+            </NavLink>
+
             <NavLink to="/skills">
                 Skills
             </NavLink>

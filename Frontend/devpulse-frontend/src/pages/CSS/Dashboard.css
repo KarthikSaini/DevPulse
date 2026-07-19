@@ -23,6 +23,10 @@ body{
     border-right:1px solid #ececec;
 }
 
+.sidebar h2{
+    margin-bottom: 20px;
+}
+
 .logo{
     margin-bottom:40px;
     color:#2563eb;
