@@ -34,6 +34,8 @@ public class DashboardServiceImpl implements DashboardService {
                 .build();
     }
 
+
+
     private Integer calculateProfileCompletion(User user){
 
         int score = 0;
@@ -107,6 +109,6 @@ public class DashboardServiceImpl implements DashboardService {
         );
 
         return platforms;
-
     }
+
 }

@@ -1,39 +1,34 @@
-export interface GithubProfile {
-
-    login: string;
-
+export interface GithubRepository {
     name: string;
-
-    avatar_url: string;
-
-    bio: string;
-
+    description: string;
+    language: string;
+    stars: number;
+    forks: number;
     htmlUrl: string;
-
-    followers: number;
-
-    following: number;
-
-    public_repos: number;
-
-    location: string;
-
+    updatedAt: string;
 }
 
-export interface Repository {
+export interface GithubResponse {
 
+    login: string;
     name: string;
-
-    description: string;
-
-    language: string;
-
-    stars: number;
-
-    forks: number;
-
-    updatedAt: string;
-
+    avatarUrl: string;
+    bio: string;
     htmlUrl: string;
+    location: string;
 
+    followers: number;
+    following: number;
+    publicRepos: number;
+
+    totalStars: number;
+    totalForks: number;
+
+    languages: Record<string, number>;
+
+    weeklyActivity: Record<string, number>;
+
+    contributionHeatmap: Record<string, number>;
+
+    repositories: GithubRepository[];
 }

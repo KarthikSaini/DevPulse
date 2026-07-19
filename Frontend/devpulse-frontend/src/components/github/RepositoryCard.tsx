@@ -1,8 +1,8 @@
-import { Repository } from "../../interfaces/Github";
+import { GithubRepository } from "../../interfaces/Github";
 
 interface Props {
 
-    repository: Repository;
+    repository: GithubRepository;
 
 }
 

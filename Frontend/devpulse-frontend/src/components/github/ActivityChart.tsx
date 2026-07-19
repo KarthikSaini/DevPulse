@@ -8,25 +8,24 @@ import {
     YAxis
 } from "recharts";
 
-const data = [
+interface ActivityChartProps {
+    activity: Record<string, number>;
+}
 
-    { day: "Mon", commits: 3 },
+function ActivityChart({ activity }: ActivityChartProps) {
 
-    { day: "Tue", commits: 7 },
+    // Convert object to array
+    const data = Object.entries(activity).map(([label, commits]) => {
 
-    { day: "Wed", commits: 5 },
+    const [day, date, month] = label.split(" ");
 
-    { day: "Thu", commits: 10 },
+    return {
+        day,
+        date: `${date} ${month}`,
+        commits
+    };
 
-    { day: "Fri", commits: 8 },
-
-    { day: "Sat", commits: 12 },
-
-    { day: "Sun", commits: 9 }
-
-];
-
-function ActivityChart() {
+});
 
     return (
 
@@ -38,19 +37,64 @@ function ActivityChart() {
 
                 <LineChart data={data}>
 
-                    <CartesianGrid strokeDasharray="3 3"/>
+                    <CartesianGrid strokeDasharray="3 3" />
 
-                    <XAxis dataKey="day"/>
+                    <XAxis
+                        dataKey="day"
+                        interval={0}
+                        tick={({ x, y, payload }) => {
 
-                    <YAxis/>
+                            const item = data.find(d => d.day === payload.value);
 
-                    <Tooltip/>
+                            return (
+
+                                <g transform={`translate(${x},${y})`}>
+
+                                    <text
+                                        x={0}
+                                        y={0}
+                                        dy={16}
+                                        textAnchor="middle"
+                                        fontWeight="600"
+                                    >
+                                        {item?.day}
+                                    </text>
+
+                                    <text
+                                        x={0}
+                                        y={18}
+                                        dy={16}
+                                        textAnchor="middle"
+                                        fill="#6b7280"
+                                        fontSize={12}
+                                    >
+                                        {item?.date}
+                                    </text>
+
+                                </g>
+
+                            );
+
+                        }}
+                    />
+
+                    <YAxis allowDecimals={false} />
+
+                    <Tooltip
+                        formatter={(value) => [`${value} activities`, "Count"]}
+                        labelFormatter={(label) => {
+                            const item = data.find(d => d.day === label);
+                            return `${item?.day} ${item?.date}`;
+                        }}
+                    />
 
                     <Line
                         type="monotone"
                         dataKey="commits"
                         stroke="#2563eb"
                         strokeWidth={3}
+                        dot={{ r: 5 }}
+                        activeDot={{ r: 8 }}
                     />
 
                 </LineChart>

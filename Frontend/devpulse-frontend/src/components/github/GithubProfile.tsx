@@ -1,7 +1,7 @@
-import { GithubProfile } from "../../interfaces/Github";
+import { GithubResponse } from "../../interfaces/Github";
 
 interface Props {
-    profile?: GithubProfile;
+    profile?: GithubResponse;
 }
 
 function GithubProfileCard({ profile }: Props) {
@@ -17,7 +17,7 @@ function GithubProfileCard({ profile }: Props) {
         <div className="github-profile-card">
 
             <img
-                src={profile.avatar_url}
+                src={profile.avatarUrl}
                 alt={profile.name}
                 className="github-avatar"
             />

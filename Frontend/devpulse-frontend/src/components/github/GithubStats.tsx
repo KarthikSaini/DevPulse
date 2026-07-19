@@ -1,39 +1,50 @@
-import { GithubProfile } from "../../interfaces/Github";
+import { GithubResponse } from "../../interfaces/Github";
 
 interface Props {
-    profile?: GithubProfile;
+
+    profile: GithubResponse;
+
 }
 
 function GithubStats({ profile }: Props) {
 
-    if (!profile) return null;
-
-    console.log(profile);
-    
-
     return (
 
-        <div className="github-stats">
+        <div className="stats-grid">
 
-            <div className="stat-box">
-                <h3>{profile.followers}</h3>
-                <p>Followers</p>
+            <div className="stat-card">
+
+                <h2>{profile.publicRepos}</h2>
+
+                <span>Repositories</span>
+
             </div>
 
-            <div className="stat-box">
-                <h3>{profile.following}</h3>
-                <p>Following</p>
+            <div className="stat-card">
+
+                <h2>{profile.followers}</h2>
+
+                <span>Followers</span>
+
             </div>
 
-            <div className="stat-box">
-                <h3>{profile.public_repos}</h3>
-                <p>Repositories</p>
+            <div className="stat-card">
+
+                <h2>{profile.totalStars}</h2>
+
+                <span>Stars</span>
+
+            </div>
+
+            <div className="stat-card">
+
+                <h2>{profile.totalForks}</h2>
+
+                <span>Forks</span>
+
             </div>
 
         </div>
-
-                  
-
 
     );
 

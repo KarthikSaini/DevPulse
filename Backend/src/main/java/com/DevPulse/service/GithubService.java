@@ -1,13 +1,9 @@
 package com.DevPulse.service;
 
-import com.DevPulse.dto.GithubProfileResponse;
-import com.DevPulse.dto.GithubRepositoryResponse;
-
-import java.util.List;
+import com.DevPulse.dto.GithubResponse;
 
 public interface GithubService {
 
-    GithubProfileResponse getProfile(Long userId);
+    GithubResponse getProfile(Long userId);
 
-    List<GithubRepositoryResponse> getRepositories(Long userId);
 }

@@ -1,123 +1,114 @@
 import {
-
-    ResponsiveContainer,
-
     PieChart,
-
     Pie,
-
-    Tooltip,
-
     Cell,
-
+    Tooltip,
+    ResponsiveContainer,
     Legend
-
 } from "recharts";
 
-const data = [
-
-    {
-
-        name: "Java",
-
-        value: 45
-
-    },
-
-    {
-
-        name: "React",
-
-        value: 25
-
-    },
-
-    {
-
-        name: "Spring Boot",
-
-        value: 15
-
-    },
-
-    {
-
-        name: "Docker",
-
-        value: 10
-
-    },
-
-    {
-
-        name: "AWS",
-
-        value: 5
-
-    }
-
-];
+interface LanguageChartProps {
+    languages: Record<string, number>;
+}
 
 const COLORS = [
-
     "#2563eb",
-
-    "#10b981",
-
-    "#f59e0b",
-
-    "#ef4444",
-
-    "#8b5cf6"
-
+    "#3b82f6",
+    "#60a5fa",
+    "#93c5fd",
+    "#1d4ed8",
+    "#38bdf8"
 ];
 
-function LanguageChart() {
+function LanguageChart({ languages }: LanguageChartProps) {
+
+    const data = Object.entries(languages).map(([language, count]) => ({
+        name: language,
+        value: count
+    }));
 
     return (
 
         <div className="chart-card">
 
-            <h2>Languages</h2>
+            <div className="chart-header">
 
-            <ResponsiveContainer width="100%" height={300}>
+                <div>
 
-                <PieChart>
+                    <h2>Language Distribution</h2>
 
-                    <Pie
+                    <p>Languages used across your repositories</p>
 
-                        data={data}
+                </div>
 
-                        dataKey="value"
+            </div>
 
-                        nameKey="name"
+            <div className="pie-wrapper">
 
-                        outerRadius={100}
+                <ResponsiveContainer width="100%" height={300}>
 
-                    >
+                    <PieChart>
 
-                        {
+                        <Pie
+                            data={data}
+                            dataKey="value"
+                            nameKey="name"
+                            innerRadius={65}
+                            outerRadius={95}
+                            paddingAngle={3}
+                        >
 
-                            data.map((entry,index)=>(
+                            {data.map((_, index) => (
 
                                 <Cell
                                     key={index}
                                     fill={COLORS[index % COLORS.length]}
                                 />
 
-                            ))
+                            ))}
 
-                        }
+                        </Pie>
 
-                    </Pie>
+                        <Tooltip />
 
-                    <Legend/>
+                        <Legend />
 
-                    <Tooltip/>
+                    </PieChart>
 
-                </PieChart>
+                </ResponsiveContainer>
 
-            </ResponsiveContainer>
+            </div>
+
+            <div className="language-list">
+
+                {data.map((language, index) => (
+
+                    <div
+                        className="language-item"
+                        key={language.name}
+                    >
+
+                        <div className="language-left">
+
+                            <span
+                                className="language-dot"
+                                style={{
+                                    background:
+                                        COLORS[index % COLORS.length]
+                                }}
+                            />
+
+                            <span>{language.name}</span>
+
+                        </div>
+
+                        <strong>{language.value} Repos</strong>
+
+                    </div>
+
+                ))}
+
+            </div>
 
         </div>
 
