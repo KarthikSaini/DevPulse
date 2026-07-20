@@ -102,12 +102,21 @@ public class UserServiceImpl implements UserService{
         return deletedUser.isPresent();
     }
 
+    @Override
+    public UserResponse getById(Long id) {
+        User user = userRepository.findById(id)
+                .orElseThrow(()->new UserNotFoundException("User not found"));
+
+        return mapToUserResponse(user);
+    }
+
     private UserResponse mapToUserResponse(User user){
         return UserResponse.builder()
                 .id(user.getId()).
                 name(user.getName())
                 .email(user.getEmail())
                 .bio(user.getBio())
+                .leetcode_username(user.getLeetcode_username())
                 .githubUsername(user.getGithubUsername())
                 .profileImage(user.getProfileImage())
                 .build();

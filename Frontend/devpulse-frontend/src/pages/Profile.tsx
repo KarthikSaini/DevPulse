@@ -1,18 +1,60 @@
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./CSS/Profile.css";
+import { getProfile } from "../services/profileService";
+
+interface UserProfile {
+
+    name: string;
+    email: string;
+
+    githubUsername: string;
+
+    leetcodeUsername: string;
+
+    linkedinUrl: string;
+
+    profileImage: string | null;
+}
 
 function Profile() {
 
     const navigate = useNavigate();
 
-    const logout = () => {
+    const [user, setUser] = useState<UserProfile>();
 
-        localStorage.removeItem("token");
-        localStorage.removeItem("userId");
+    useEffect(() => {
+
+        loadProfile();
+
+    }, []);
+
+    async function loadProfile() {
+
+        const userId = Number(localStorage.getItem("userId"));
+
+        const response = await getProfile(userId);
+
+        console.log(response);
+        
+
+        setUser(response);
+
+    }
+
+    function logout() {
+
+        localStorage.clear();
 
         navigate("/");
 
-    };
+    }
+
+    if (!user) {
+
+        return <h2>Loading...</h2>;
+
+    }
 
     return (
 
@@ -21,41 +63,78 @@ function Profile() {
             <div className="profile-card">
 
                 <img
-                    src="https://ui-avatars.com/api/?name=User"
-                    alt="profile"
+
+                    src={
+                        user.profileImage ??
+                        `https://ui-avatars.com/api/?name=${encodeURIComponent(user.name)}&background=2563eb&color=fff&size=180`
+                    }
+
+                    alt={user.name}
+
                     className="profile-avatar"
+
                 />
 
-                <h2>Karthik Saini</h2>
+                <h1>{user.name}</h1>
 
-                <p>karthik@gmail.com</p>
+                <p className="profile-email">
 
-                <div className="profile-section">
+                    {user.email}
 
-                    <h3>Developer Accounts</h3>
+                </p>
+
+                <div className="profile-divider" />
+
+                <div className="profile-grid">
 
                     <div className="profile-item">
-                        <span>GitHub</span>
-                        <span>KarthikSaini</span>
+
+                        <span className="title">GitHub</span>
+
+                        <span>{user.githubUsername || "-"}</span>
+
                     </div>
 
                     <div className="profile-item">
-                        <span>LeetCode</span>
-                        <span>LJeriFUfr4</span>
+
+                        <span className="title">LeetCode</span>
+
+                        <span>{user.leetcodeUsername || "-"}</span>
+
                     </div>
 
                     <div className="profile-item">
-                        <span>LinkedIn</span>
-                        <span>linkedin.com/in/karthik</span>
+
+                        <span className="title">LinkedIn</span>
+
+                        <a
+
+                            href={user.linkedinUrl}
+
+                            target="_blank"
+
+                            rel="noreferrer"
+
+                        >
+
+                            {user.linkedinUrl || "-"}
+
+                        </a>
+
                     </div>
 
                 </div>
 
                 <button
+
                     className="logout-btn"
+
                     onClick={logout}
+
                 >
+
                     Sign Out
+
                 </button>
 
             </div>

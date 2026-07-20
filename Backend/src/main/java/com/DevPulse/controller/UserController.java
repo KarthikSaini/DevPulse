@@ -28,9 +28,15 @@ public class UserController {
     }
 
     @GetMapping("/user")
-    public ResponseEntity<UserResponse> getById(@RequestBody Map<String, String> request){
+    public ResponseEntity<UserResponse> getByEmail(@RequestBody Map<String, String> request){
         String email = request.get("email");
         UserResponse response = userService.getByEmail(email);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @GetMapping("/profile/{userId}")
+    public ResponseEntity<UserResponse> getById(@PathVariable Long userId){
+        UserResponse response = userService.getById(userId);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 

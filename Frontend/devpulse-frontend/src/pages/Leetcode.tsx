@@ -4,11 +4,12 @@ import "./CSS/Leetcode.css";
 import { LeetcodeResponse } from "../interfaces/Leetcode";
 import { getLeetcodeDashboard } from "../services/leetcodeService";
 import LeetcodeHeatmap from "../components/Leetcode/LeetcodeHeatmap";
-import Sidebar from "../components/dashboard/Sidebar";
 
 function Leetcode() {
 
-    const [leetcode, setLeetcode] = useState<LeetcodeResponse>();
+    const [leetcode, setLeetcode] = useState<LeetcodeResponse | null>(null);
+
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
 
@@ -18,25 +19,101 @@ function Leetcode() {
 
     async function loadLeetcode() {
 
-        const userId = Number(
-            localStorage.getItem("userId")
-        );
+        try {
 
-        const response = await getLeetcodeDashboard(userId);
+            const userId = Number(localStorage.getItem("userId"));
 
-        setLeetcode(response);
+            const response = await getLeetcodeDashboard(userId);
+
+            setLeetcode(response);
+
+        }
+
+        catch (error) {
+
+            console.log(error);
+
+            setLeetcode(null);
+
+        }
+
+        finally {
+
+            setLoading(false);
+
+        }
 
     }
 
-    if (!leetcode)
-        return <div className="leetcode-loading">Loading...</div>;
+    if (loading) {
+
+        return (
+
+            <div className="leetcode-loading">
+
+                Loading...
+
+            </div>
+
+        );
+
+    }
+
+    // User has not connected LeetCode
+
+    if (!leetcode) {
+
+        return (
+
+            <div className="empty-profile">
+
+                <div className="empty-card">
+
+                    <div className="empty-icon">
+
+                        💻
+
+                    </div>
+
+                    <h2>Connect your LeetCode Account</h2>
+
+                    <p>
+
+                        You haven't added your LeetCode username yet.
+
+                        Add it from your Profile page to unlock:
+
+                    </p>
+
+                    <ul>
+
+                        <li>🔥 Contribution Heatmap</li>
+
+                        <li>🏆 Contest Rating</li>
+
+                        <li>📈 Solved Problems</li>
+
+                        <li>📝 Recent Submissions</li>
+
+                    </ul>
+
+                    <button
+                        onClick={() => window.location.href = "/profile"}
+                    >
+
+                        Go to Profile
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        );
+
+    }
 
     return (
-
-        <div className="app-layout">
-
-            {/* <Sidebar /> */}
-
 
         <div className="leetcode-page">
 
@@ -55,9 +132,13 @@ function Leetcode() {
 
                     <div className="leetcode-badges">
 
-                        <span>🏆 Rank #{leetcode.ranking.toLocaleString()}</span>
+                        <span>
+                            🏆 Rank #{leetcode.ranking.toLocaleString()}
+                        </span>
 
-                        <span>⭐ Reputation {leetcode.reputation}</span>
+                        <span>
+                            ⭐ Reputation {leetcode.reputation}
+                        </span>
 
                     </div>
 
@@ -102,7 +183,9 @@ function Leetcode() {
             </div>
 
             <LeetcodeHeatmap
+
                 submissionCalendar={leetcode.submissionCalendar}
+
             />
 
             <div className="contest-card">
@@ -121,7 +204,11 @@ function Leetcode() {
 
                     <div>
 
-                        <h3>#{leetcode.contestRanking.toLocaleString()}</h3>
+                        <h3>
+
+                            #{leetcode.contestRanking.toLocaleString()}
+
+                        </h3>
 
                         <p>Global Ranking</p>
 
@@ -145,7 +232,11 @@ function Leetcode() {
 
                     <h2>📝 Recent Submissions</h2>
 
-                    <span>{leetcode.recentSubmissions.length} submissions</span>
+                    <span>
+
+                        {leetcode.recentSubmissions.length} submissions
+
+                    </span>
 
                 </div>
 
@@ -154,8 +245,11 @@ function Leetcode() {
                     {leetcode.recentSubmissions.map((submission, index) => (
 
                         <div
+
                             key={`${submission.titleSlug}-${submission.timestamp}-${index}`}
+
                             className="submission-item"
+
                         >
 
                             <div className="submission-info">
@@ -165,24 +259,40 @@ function Leetcode() {
                                 <div className="submission-meta">
 
                                     <span className="lang">
+
                                         {submission.lang.toUpperCase()}
+
                                     </span>
 
                                     <span className="time">
+
                                         {new Date(Number(submission.timestamp) * 1000)
                                             .toLocaleDateString("en-GB", {
+
                                                 day: "2-digit",
+
                                                 month: "short",
+
                                                 year: "numeric"
+
                                             })}
+
                                     </span>
 
                                 </div>
 
                             </div>
 
-                            <span className={`status ${submission.statusDisplay === "Accepted" ? "accepted" : "other"}`}>
+                            <span
+                                className={`status ${
+                                    submission.statusDisplay === "Accepted"
+                                        ? "accepted"
+                                        : "other"
+                                }`}
+                            >
+
                                 {submission.statusDisplay}
+
                             </span>
 
                         </div>
@@ -192,8 +302,6 @@ function Leetcode() {
                 </div>
 
             </div>
-
-        </div>
 
         </div>
 
