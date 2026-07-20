@@ -36,6 +36,10 @@ function Sidebar() {
                 Settings
             </NavLink>
 
+            <NavLink to="/profile">
+                Profile
+            </NavLink>
+
         </aside>
 
     );

@@ -6,6 +6,7 @@ import com.DevPulse.dto.SignupRequest;
 import com.DevPulse.dto.UserResponse;
 import com.DevPulse.entity.User;
 import com.DevPulse.exception.EmailAlreadyExistsException;
+import com.DevPulse.exception.PasswordNotMatchedException;
 import com.DevPulse.exception.UserNotFoundException;
 import com.DevPulse.repository.UserRepository;
 import com.DevPulse.service.AuthService;
@@ -54,7 +55,7 @@ public class AuthServiceImpl implements AuthService {
         }
 
         if(!request.getPassword().equals(user.getPassword())){
-            throw new RuntimeException("Invalid Password");
+            throw new PasswordNotMatchedException("Password is incorrect");
         }
 
         return LoginResponse.builder()

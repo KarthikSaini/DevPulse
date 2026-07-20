@@ -1,33 +1,42 @@
 import { useState } from "react";
-import { login } from "../services/authService";
-import "../styles/Auth.css";
 import { useNavigate } from "react-router-dom";
-import { LoginRequest } from "../interfaces/Login";
+import { login } from "../services/authService";
 import { savedUserSession } from "../utils/storage";
+import { LoginRequest } from "../interfaces/Login";
+
+import "../styles/Auth.css";
 
 function Login() {
 
     const navigate = useNavigate();
 
     const [form, setForm] = useState<LoginRequest>({
-
         email: "",
         password: ""
-
     });
+
+    const [loading, setLoading] = useState(false);
+
+    const [error, setError] = useState("");
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 
         setForm({
-
             ...form,
             [e.target.name]: e.target.value
-
         });
 
+        setError("");
     };
 
     const handleSubmit = async () => {
+
+        if (!form.email || !form.password) {
+            setError("Please enter email and password.");
+            return;
+        }
+
+        setLoading(true);
 
         try {
 
@@ -37,11 +46,33 @@ function Login() {
 
             navigate("/dashboard");
 
-        }
+        } catch (error: any) {
 
-        catch (error) {
+            const code = error.response?.data?.errorCode?.trim();
+            
 
-            console.log(error);
+            switch (code) {
+
+                case "USER_NOT_FOUND":
+                    setError("No account found with this email.");
+                    break;
+
+                case "INVALID_PASSWORD":
+                    setError("Incorrect password.");
+                    break;
+
+                case "EMAIL_ALREADY_EXISTS":
+                    setError("Email is already registered.");
+                    break;
+
+                default:
+                    setError("Something went wrong.");
+            }
+        }   
+
+        finally {
+
+            setLoading(false);
 
         }
 
@@ -49,45 +80,85 @@ function Login() {
 
     return (
 
-        <div className="auth-container">
+        <div className="login-page">
 
-            <div className="auth-card">
+            {/* Left Side */}
 
-                <h1>Welcome Back</h1>
+            <div className="login-left">
 
-                <p>Login to continue</p>
+                <div className="overlay">
 
-                <input
-                    type="email"
-                    name="email"
-                    placeholder="Email"
-                    value={form.email}
-                    onChange={handleChange}
-                />
+                    <h1>DevPulse</h1>
 
-                <input
-                    type="password"
-                    name="password"
-                    placeholder="Password"
-                    value={form.password}
-                    onChange={handleChange}
-                />
+                    <p>
+                        Your Developer Portfolio Dashboard
+                    </p>
 
-                <button onClick={handleSubmit}>
+                    <ul>
+                        <li>🚀 GitHub Analytics</li>
+                        <li>📈 LeetCode Dashboard</li>
+                        <li>💻 Projects & Skills</li>
+                        <li>🏆 Developer Portfolio</li>
+                    </ul>
 
-                    Login
+                </div>
 
-                </button>
+            </div>
 
-                <div className="auth-link">
+            {/* Right Side */}
 
-                    Don't have an account?
+            <div className="login-right">
 
-                    <span onClick={() => navigate("/signup")}>
+                <div className="login-card">
 
-                        Sign Up
+                    <h2>Welcome Back 👋</h2>
 
-                    </span>
+                    <p>
+                        Login to continue
+                    </p>
+
+                    {error && (
+                        <div className="error-box">
+                            {error}
+                        </div>
+                    )}
+
+                    <input
+                        type="email"
+                        name="email"
+                        placeholder="Email Address"
+                        value={form.email}
+                        onChange={handleChange}
+                    />
+
+                    <input
+                        type="password"
+                        name="password"
+                        placeholder="Password"
+                        value={form.password}
+                        onChange={handleChange}
+                    />
+
+                    <button
+                        onClick={handleSubmit}
+                        disabled={loading}
+                    >
+                        {loading ? "Signing In..." : "Login"}
+                    </button>
+
+                    <div className="divider">
+                        OR
+                    </div>
+
+                    <p className="signup-text">
+
+                        Don't have an account?
+
+                        <span onClick={() => navigate("/signup")}>
+                            Create Account
+                        </span>
+
+                    </p>
 
                 </div>
 
@@ -96,7 +167,6 @@ function Login() {
         </div>
 
     );
-
 }
 
 export default Login;

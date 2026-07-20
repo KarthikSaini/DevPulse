@@ -1,30 +1,64 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
 import Login from "../pages/Login";
 import Signup from "../pages/Signup";
-import Github from "../pages/Github";
+
 import Dashboard from "../pages/Dashboard";
+import Github from "../pages/Github";
 import Leetcode from "../pages/Leetcode";
-import MainLayout from "../layouts/MainLayout";
 import Skills from "../pages/Skills";
 import Projects from "../pages/Projects";
 
+import MainLayout from "../layouts/MainLayout";
+import ProtectedRoute from "./ProtectedRoute";
+import Profile from "../pages/Profile";
 
 function AppRoutes() {
+
     return (
-    <BrowserRouter>
-        <Routes>
-            <Route element={<MainLayout />} >
-            <Route path="/" element={ <Login/> }/>
-            <Route path="/signup" element={ <Signup/> }/>
-            <Route path="/dashboard" element={ <Dashboard/> }/>
-            <Route path="/github" element={ <Github/> }/>
-            <Route path="/leetcode" element={ <Leetcode/> } />
-            <Route path="/Skills" element={ <Skills/> } />
-            <Route path="/Projects" element={ <Projects/> } />
-            </Route>
-        </Routes>
-    </BrowserRouter>
-    )
+
+        <BrowserRouter>
+
+            <Routes>
+
+                {/* Public Routes */}
+
+                <Route path="/" element={<Login />} />
+
+                <Route path="/signup" element={<Signup />} />
+
+
+
+                {/* Protected Routes */}
+
+                <Route
+                    element={
+                        <ProtectedRoute>
+                            <MainLayout />
+                        </ProtectedRoute>
+                    }
+                >
+
+                    <Route path="/dashboard" element={<Dashboard />} />
+
+                    <Route path="/github" element={<Github />} />
+
+                    <Route path="/leetcode" element={<Leetcode />} />
+
+                    <Route path="/skills" element={<Skills />} />
+
+                    <Route path="/projects" element={<Projects />} />
+
+                    <Route path="/profile" element={<Profile />} />
+
+                </Route>
+
+            </Routes>
+
+        </BrowserRouter>
+
+    );
+
 }
 
 export default AppRoutes;

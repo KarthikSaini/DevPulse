@@ -12,5 +12,7 @@ export const signup = async (data: SignupRequest): Promise<void> => {
 
 export const login = async(data:LoginRequest): Promise<LoginResponse> => {
     const response = await api.post("/auth/login",data);
+    console.log(response.data);
+    
     return response.data;
 }

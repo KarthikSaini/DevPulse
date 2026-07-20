@@ -79,8 +79,8 @@ public class DashboardServiceImpl implements DashboardService {
 
                 PlatformDTO.builder()
                         .name("LeetCode")
-                        .connected(false)
-                        .username(null)
+                        .connected(user.getLeetcode_username() != null)
+                        .username(user.getGithubUsername())
                         .icon("🟡")
                         .build()
 

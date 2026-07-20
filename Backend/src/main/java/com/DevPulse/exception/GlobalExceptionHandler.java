@@ -30,13 +30,14 @@ public class GlobalExceptionHandler {
 
         ErrorResponse error = ErrorResponse.builder()
                 .timestamp(LocalDateTime.now())
-                .status(HttpStatus.CONFLICT.value())
+                .status(409)   // status(HttpStatus.CONFLICT.value())
                 .error(HttpStatus.CONFLICT.getReasonPhrase())
-                .message(ex.getMessage())
+                .errorCode("EMAIL_ALREADY_EXISTS")
+                .message("Email already exists")
                 .build();
 
         return ResponseEntity
-                .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .status(HttpStatus.CONFLICT)
                 .body(error);
     }
 
@@ -44,8 +45,26 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ErrorResponse> handleUserNotFoundException(UserNotFoundException ex){
         ErrorResponse error =ErrorResponse.builder()
                 .timestamp(LocalDateTime.now())
-                .status(HttpStatus.NOT_FOUND.value())
-                .error(HttpStatus.NOT_FOUND.getReasonPhrase())
+                .status(HttpStatus.UNAUTHORIZED.value())   // 401
+                .error(HttpStatus.UNAUTHORIZED.getReasonPhrase())
+                .message(ex.getMessage())
+                .errorCode("USER_NOT_FOUND")
+                .message("User does not exist.")
+                .build();
+
+        return ResponseEntity
+                .status(HttpStatus.UNAUTHORIZED)
+                .body(error);
+    }
+
+    @ExceptionHandler(PasswordNotMatchedException.class)
+    public ResponseEntity<ErrorResponse> handlePasswordNotMatchedException(PasswordNotMatchedException ex){
+        ErrorResponse error = ErrorResponse.builder()
+                .timestamp(LocalDateTime.now())
+                .status(401)
+                .error(HttpStatus.UNAUTHORIZED.getReasonPhrase())
+                .errorCode("INVALID_PASSWORD")
+                .message("Password is incorrect")
                 .message(ex.getMessage())
                 .build();
 

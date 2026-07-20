@@ -29,6 +29,9 @@ function Dashboard() {
 
         setDashboard(response);
 
+        console.log(response);
+        
+
     };
 
     return (
