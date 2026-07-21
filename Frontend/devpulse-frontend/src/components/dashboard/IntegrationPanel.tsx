@@ -1,28 +1,37 @@
+import { useState } from "react";
+
 import { Dashboard } from "../../interfaces/Dashboard";
+import ConnectLeetcode from "../Leetcode/ConnectLeetcode";
 
-interface Props{
-
+interface Props {
     dashboard?: Dashboard;
-
 }
 
-function IntegrationPanel({dashboard}:Props){
+function IntegrationPanel({ dashboard }: Props) {
 
-    return(
+    const [openLeetcodeModal, setOpenLeetcodeModal] = useState(false);
 
-        <div className="integration-card">
+    const [leetcodeUsername, setLeetcodeUsername] = useState("");
 
-            <h2>
+    const openLeetcode = (username?: string | null) => {
 
-                Connected Platforms
+        setLeetcodeUsername(username ?? "");
 
-            </h2>
+        setOpenLeetcodeModal(true);
 
-            <div className="integration-list">
+    };
 
-                {
+    return (
 
-                    dashboard?.platforms.map(platform=>(
+        <>
+
+            <div className="integration-card">
+
+                <h2>Connected Platforms</h2>
+
+                <div className="integration-list">
+
+                    {dashboard?.platforms.map((platform) => (
 
                         <div
                             key={platform.name}
@@ -33,15 +42,11 @@ function IntegrationPanel({dashboard}:Props){
 
                                 <strong>
 
-                                    {platform.icon}
-
-                                    {" "}
-
-                                    {platform.name}
+                                    {platform.icon} {platform.name}
 
                                 </strong>
 
-                                <br/>
+                                <br />
 
                                 {
 
@@ -53,7 +58,7 @@ function IntegrationPanel({dashboard}:Props){
 
                                         </small>
 
-                                    :
+                                        :
 
                                         <small>
 
@@ -65,7 +70,25 @@ function IntegrationPanel({dashboard}:Props){
 
                             </div>
 
-                            {
+                            {/* LeetCode */}
+
+                            {platform.name === "LeetCode" ? (
+
+                                <button
+
+                                    className={platform.connected ? "connected" : ""}
+
+                                    onClick={() =>
+                                        openLeetcode(platform.username)
+                                    }
+
+                                >
+
+                                    {platform.connected ? "Update" : "Connect"}
+
+                                </button>
+
+                            ) : (
 
                                 platform.connected ?
 
@@ -75,25 +98,60 @@ function IntegrationPanel({dashboard}:Props){
 
                                     </button>
 
-                                :
+                                    :
 
-                                    <button>
+                                    <button
+
+                                        onClick={() => {
+
+                                            switch (platform.name) {
+
+                                                case "GitHub":
+                                                    alert("GitHub connection coming soon");
+                                                    break;
+
+                                                case "LinkedIn":
+                                                    alert("LinkedIn connection coming soon");
+                                                    break;
+
+                                                case "Jira":
+                                                    alert("Jira connection coming soon");
+                                                    break;
+
+                                                default:
+                                                    break;
+
+                                            }
+
+                                        }}
+
+                                    >
 
                                         Connect
 
                                     </button>
 
-                            }
+                            )}
 
                         </div>
 
-                    ))
+                    ))}
 
-                }
+                </div>
 
             </div>
 
-        </div>
+            <ConnectLeetcode
+
+                open={openLeetcodeModal}
+
+                currentUsername={leetcodeUsername}
+
+                onClose={() => setOpenLeetcodeModal(false)}
+
+            />
+
+        </>
 
     );
 

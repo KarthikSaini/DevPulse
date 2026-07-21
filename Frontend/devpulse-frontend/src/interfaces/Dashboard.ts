@@ -13,4 +13,5 @@ export interface Dashboard {
     profileImage: string;
     profileCompletion: number;
     platforms: Platform[];
+    leetcode_username: string;
 }

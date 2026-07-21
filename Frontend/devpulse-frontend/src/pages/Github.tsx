@@ -30,7 +30,13 @@ function Github() {
 
             const user = await getDashboard(userId);
 
-            if (!user.github_username) {
+            console.log(user);
+
+            const githubPlatform = user.platforms.find(
+                (platform: any) => platform.name === "GitHub"
+            );
+
+            if (!githubPlatform || !githubPlatform.connected) {
                 setGithubConnected(false);
                 return;
             }

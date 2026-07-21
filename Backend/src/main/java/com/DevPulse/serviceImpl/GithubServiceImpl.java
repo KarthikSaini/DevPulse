@@ -7,7 +7,6 @@ import com.DevPulse.repository.UserRepository;
 import com.DevPulse.service.GithubService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
 
@@ -24,9 +23,6 @@ public class GithubServiceImpl implements GithubService {
 
     private final RestClient restClient;
     private final UserRepository userRepository;
-
-//    @Value("${github.token}")
-//    private String githubToken;
 
     @Override
     public GithubResponse getProfile(Long userId) {

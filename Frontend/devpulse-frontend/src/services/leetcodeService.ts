@@ -7,3 +7,22 @@ export const getLeetcodeDashboard = async (userId: number): Promise<LeetcodeResp
     console.log(response.data);
     return response.data;
 }
+
+export async function updateLeetcodeUsername(
+    userId: number,
+    username: string
+) {
+
+    return api.put(
+
+        `/users/${userId}`,
+
+        {
+
+            "leetcode_username":username
+
+        }
+
+    );
+
+}

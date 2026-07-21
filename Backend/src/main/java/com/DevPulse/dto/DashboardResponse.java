@@ -32,4 +32,7 @@ public class DashboardResponse {
     private Integer connectedPlatforms;
 
     private List<PlatformDTO> platforms;
+
+    private String leetcode_username;
+
 }

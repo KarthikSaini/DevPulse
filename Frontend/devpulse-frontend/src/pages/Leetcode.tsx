@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
-import "./CSS/Leetcode.css";
+import "./CSS/Leetcode.css";    
 
 import { LeetcodeResponse } from "../interfaces/Leetcode";
 import { getLeetcodeDashboard } from "../services/leetcodeService";
 import LeetcodeHeatmap from "../components/Leetcode/LeetcodeHeatmap";
+import ConnectLeetcode from "../components/Leetcode/ConnectLeetcode";
 
 function Leetcode() {
 
@@ -59,6 +60,7 @@ function Leetcode() {
 
     }
 
+
     // User has not connected LeetCode
 
     if (!leetcode) {
@@ -98,10 +100,10 @@ function Leetcode() {
                     </ul>
 
                     <button
-                        onClick={() => window.location.href = "/profile"}
+                        onClick={() => window.location.href = "/dashboard"}
                     >
 
-                        Go to Profile
+                        Go to Dashboard
 
                     </button>
 

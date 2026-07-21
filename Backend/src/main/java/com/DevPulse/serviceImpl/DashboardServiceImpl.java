@@ -31,6 +31,7 @@ public class DashboardServiceImpl implements DashboardService {
                 .profileImage(user.getProfileImage())
                 .profileCompletion(calculateProfileCompletion(user))
                 .platforms(getPlatforms(user))
+                .leetcode_username(user.getLeetcode_username())
                 .build();
     }
 
@@ -80,7 +81,7 @@ public class DashboardServiceImpl implements DashboardService {
                 PlatformDTO.builder()
                         .name("LeetCode")
                         .connected(user.getLeetcode_username() != null)
-                        .username(user.getGithubUsername())
+                        .username(user.getLeetcode_username())
                         .icon("🟡")
                         .build()
 

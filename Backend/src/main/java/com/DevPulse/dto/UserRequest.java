@@ -22,4 +22,6 @@ public class UserRequest {
     private String githubUsername;
 
     private String profileImage;
+
+    private String leetcode_username;
 }
