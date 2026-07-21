@@ -10,7 +10,7 @@ interface UserProfile {
 
     githubUsername: string;
 
-    leetcodeUsername: string;
+    leetcode_username: string;
 
     linkedinUrl: string;
 
@@ -99,7 +99,7 @@ function Profile() {
 
                         <span className="title">LeetCode</span>
 
-                        <span>{user.leetcodeUsername || "-"}</span>
+                        <span>{user.leetcode_username || "-"}</span>
 
                     </div>
 

@@ -150,3 +150,58 @@
     border-radius:8px;
 
 }
+
+.loading{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:70vh;
+    font-size:20px;
+    color:#64748b;
+}
+
+.empty-state{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:75vh;
+}
+
+.empty-card{
+    max-width:500px;
+    background:#fff;
+    padding:40px;
+    border-radius:20px;
+    text-align:center;
+    box-shadow:0 10px 30px rgba(0,0,0,.08);
+}
+
+.empty-icon{
+    font-size:70px;
+    margin-bottom:15px;
+}
+
+.empty-card h2{
+    margin-bottom:10px;
+}
+
+.empty-card p{
+    color:#64748b;
+    line-height:1.7;
+    margin-bottom:25px;
+}
+
+.connect-btn{
+    display:inline-block;
+    background:#2563eb;
+    color:white;
+    padding:12px 30px;
+    border-radius:10px;
+    text-decoration:none;
+    font-weight:600;
+    transition:.3s;
+}
+
+.connect-btn:hover{
+    background:#1d4ed8;
+}

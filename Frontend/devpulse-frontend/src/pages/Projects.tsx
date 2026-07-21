@@ -1,101 +1,126 @@
+import { useEffect, useState } from "react";
 import "./CSS/Projects.css";
+
 import ProjectGrid from "../components/projects/ProjectGrid";
 import { Project } from "../interfaces/Project";
+import { getGithubDashboard } from "../services/githubService";
+import { Link } from "react-router-dom";
 
-const projects:Project[]=[
+function Projects() {
 
-{
-    name:"DevPulse",
+    const [projects, setProjects] = useState<Project[]>([]);
+    const [loading, setLoading] = useState(true);
+    const [githubConnected, setGithubConnected] = useState(true);
 
-    description:"Developer analytics dashboard integrating GitHub and LeetCode.",
+    useEffect(() => {
+        loadProjects();
+    }, []);
 
-    image:"/projects/devpulse.png",
+    async function loadProjects() {
 
-    github:"https://github.com/KarthikSaini/DevPulse",
+        try {
 
-    demo:"#",
+            const userId = Number(localStorage.getItem("userId"));
 
-    tech:[
-        "React",
-        "Spring Boot",
-        "TypeScript",
-        "MySQL"
-    ],
+            const github = await getGithubDashboard(userId);
 
-    language:"Java",
+            // GitHub username not added
+            if (
+                !github ||
+                !github.repositories ||
+                github.repositories.length === 0
+            ) {
 
-    stars:0,
+                setGithubConnected(false);
+                return;
+            }
 
-    forks:0,
+            const mappedProjects: Project[] = github.repositories.map((repo: any) => ({
 
-    updated:"19 Jul 2026",
+                name: repo.name,
 
-    status:"In Progress"
-},
+                description: repo.description || "No description provided.",
 
-{
-    name:"Netflix",
+                image: "/projects/default-project.png",
 
-    description:"Netflix clone built using Spring Boot Microservices.",
+                github: repo.html_url,
 
-    image:"/projects/netflix.png",
+                demo: "#",
 
-    github:"https://github.com/KarthikSaini/Netflix",
+                tech: repo.language ? [repo.language] : [],
 
-    demo:"#",
+                language: repo.language || "Unknown",
 
-    tech:[
-        "Spring Boot",
-        "Kafka",
-        "Redis",
-        "Docker",
-        "AWS"
-    ],
+                stars: repo.stargazers_count,
 
-    language:"Java",
+                forks: repo.forks_count,
 
-    stars:0,
+                updated: new Date(repo.updated_at).toLocaleDateString(
+                    "en-GB",
+                    {
+                        day: "2-digit",
+                        month: "short",
+                        year: "numeric"
+                    }
+                ),
 
-    forks:0,
+                status: "Completed"
 
-    updated:"18 Jun 2026",
+            }));
 
-    status:"Completed"
-},
+            setProjects(mappedProjects);
 
-{
-    name:"JournalApp",
+        } catch (error) {
 
-    description:"Personal journal application using Redis and MongoDB.",
+            setGithubConnected(false);
 
-    image:"/projects/journal.png",
+        } finally {
 
-    github:"https://github.com/KarthikSaini/JournalApp",
+            setLoading(false);
 
-    demo:"#",
+        }
+    }
 
-    tech:[
-        "Java",
-        "MongoDB",
-        "Redis"
-    ],
+    if (loading) {
+        return <div className="loading">Loading projects...</div>;
+    }
 
-    language:"Java",
+    if (!githubConnected) {
 
-    stars:0,
+        return (
 
-    forks:0,
+            <div className="empty-state">
 
-    updated:"17 Jun 2026",
+                <div className="empty-card">
 
-    status:"Completed"
-}
+                    <div className="empty-icon">
+                        🐙
+                    </div>
 
-];
+                    <h2>GitHub Not Connected</h2>
 
-function Projects(){
+                    <p>
 
-    return(
+                        Connect your GitHub account to display your repositories,
+                        technologies, and project statistics.
+
+                    </p>
+
+                    <Link
+                        to="/dashboard"
+                        className="connect-btn"
+                    >
+                        Connect GitHub
+                    </Link>
+
+                </div>
+
+            </div>
+
+        );
+    }
+
+    return (
 
         <div className="projects-page">
 
@@ -103,9 +128,7 @@ function Projects(){
 
             <p>Applications and products I've built.</p>
 
-            <ProjectGrid
-                projects={projects}
-            />
+            <ProjectGrid projects={projects} />
 
         </div>
 

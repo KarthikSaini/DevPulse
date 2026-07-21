@@ -1,25 +1,24 @@
-export interface Project{
+export interface Project {
 
-    name:string;
+    name: string;
 
-    description:string;
+    description: string;
 
-    image:string;
+    image: string;
 
-    github:string;
+    github: string;
 
-    demo:string;
+    demo: string;
 
-    tech:string[];
+    tech: string[];
 
-    language:string;
+    language: string;
 
-    stars:number;
+    stars: number;
 
-    forks:number;
+    forks: number;
 
-    updated:string;
+    updated: string;
 
-    status:string;
-
+    status: string;
 }
