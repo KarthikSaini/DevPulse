@@ -107,8 +107,13 @@ function IntegrationPanel({ dashboard }: Props) {
                                             switch (platform.name) {
 
                                                 case "GitHub":
-                                                    alert("GitHub connection coming soon");
-                                                    break;
+
+                                                const userId = localStorage.getItem("userId");
+
+                                                window.location.href =
+                                                    `http://localhost:8080/api/github/connect/${userId}`;
+
+                                                break;
 
                                                 case "LinkedIn":
                                                     alert("LinkedIn connection coming soon");

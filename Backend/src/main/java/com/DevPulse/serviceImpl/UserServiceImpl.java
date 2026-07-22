@@ -84,8 +84,13 @@ public class UserServiceImpl implements UserService{
         if(request.getProfileImage()!=null){
             user.setProfileImage(request.getProfileImage());
         }
+
         if(request.getLeetcode_username()!=null){
             user.setLeetcode_username(request.getLeetcode_username());
+        }
+
+        if(request.getGithubAccessToken()!=null){
+            user.setGithubAccessToken(request.getGithubAccessToken());
         }
 
         user.setUpdatedAt(LocalDateTime.now());

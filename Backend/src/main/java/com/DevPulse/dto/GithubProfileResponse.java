@@ -28,4 +28,7 @@ public class GithubProfileResponse {
 
     @JsonProperty("public_repos")
     private int publicRepos;
+
+    @JsonProperty("email")
+    private String email;
 }
