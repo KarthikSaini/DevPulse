@@ -35,7 +35,13 @@ function ActivityChart({ activity }: ActivityChartProps) {
 
             <ResponsiveContainer width="100%" height={300}>
 
-                <LineChart data={data}>
+                <LineChart data={data}
+                             margin={{
+                                top: 20,
+                                right: 25,
+                                left: 10,
+                                bottom: 40
+                            }} >
 
                     <CartesianGrid strokeDasharray="3 3" />
 
