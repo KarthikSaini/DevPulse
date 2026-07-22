@@ -12,6 +12,8 @@ import Projects from "../pages/Projects";
 import MainLayout from "../layouts/MainLayout";
 import ProtectedRoute from "./ProtectedRoute";
 import Profile from "../pages/Profile";
+import Analytics from "../pages/Analytics";
+import Settings from "../pages/Settings";
 
 function AppRoutes() {
 
@@ -50,6 +52,10 @@ function AppRoutes() {
                     <Route path="/projects" element={<Projects />} />
 
                     <Route path="/profile" element={<Profile />} />
+
+                    <Route path="/analytics" element={<Analytics />} />
+
+                    <Route path="/settings" element={<Settings />} />
 
                 </Route>
 
